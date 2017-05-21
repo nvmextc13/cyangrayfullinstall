@@ -1,0 +1,84 @@
+#!/bin/bash
+
+########## Install i3 gaps and all the pieces on a new system
+
+
+######### pallette for gnome-terminal, use dconf-editor org>gnome>terminal>profile
+##['rgb(0,0,0)', 'rgb(255,144,0)', 'rgb(20,147,222)', 'rgb(255,172,0)', 'rgb(52,101,164)', 'rgb(117,80,123)', 'rgb(0,112,178)', 'rgb(211,215,207)', 'rgb(85,87,83)', 'rgb(255,138,0)', 'rgb(0,135,215)', 'rgb(255,195,43)', 'rgb(114,159,207)', 'rgb(173,127,168)', 'rgb(0,151,240)', 'rgb(238,238,236)']
+
+echo "################################################################"
+echo "###############    STARTING INSTALLATION       #################"
+echo "################################################################"
+########## upgrade
+sudo apt-get -y update && sudo apt-get -y dist-upgrade
+sudo apt install -y adobe-flashplugin
+
+########## programs to run in terminal
+sudo apt install -y mc ranger htop iftop hwinfo etherape guake git dconf-editor
+
+########## gui programs
+sudo apt install -y thunar gparted scrot feh vlc
+
+# PPAs, grub-customizer, neofetch, sublime
+sudo add-apt-repository -y ppa:danielrichter2007/grub-customizer
+sudo add-apt-repository -y ppa:dawidd0811/neofetch
+sudo add-apt-repository -y ppa:webupd8team/sublime-text-2
+sudo apt-get -y update
+sudo apt-get install -y grub-customizer neofetch sublime-text
+
+########## terminal styling
+# style, oh-my-zsh, powerline, fonts
+sudo apt install -y zsh 
+wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
+git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+
+# replaced powerline with powerlevel
+#sudo apt install -y powerline
+
+# install icon fonts
+sudo apt-get install -y fonts-font-awesome
+sh ./awesome-terminal-fonts/install.sh
+# powerline fonts
+git clone https://github.com/powerline/fonts.git ~/.config/powerline-fonts-install
+sh ~/.config/powerline-fonts-install/install.sh
+rm -rf ~/.config/powerline-fonts-install
+
+########## get i3-gaps
+sudo sh 002i3gaps.sh
+
+########## parts for i3
+# get bumbleebee status bar
+git clone git://github.com/tobi-wan-kenobi/bumblebee-status ~/.config/bumblebee-status
+sudo apt-get install -y gcc python-dev python-pip python-setuptools
+sudo pip install --upgrade pip
+sudo -H pip install psutil
+
+# transparency of non active window
+sudo apt install -y xcompmgr
+
+# program to change icons,themes and mouse
+sudo apt-get install -y lxappearance qt4-qtconfig
+
+# cleaning
+sudo apt-get upgrade -y
+sudo apt-get autoremove -y
+sudo apt-get autoclean -y
+
+# configuration files from previous backup
+## restore config from settingsbackup.tar file
+sudo sh 003copyconfig.sh
+
+# install icons and themes
+sudo sh iconsandthemes.sh
+
+# install conky
+sudo sh ~/.config/conky/install-conky.sh
+
+# setting shell
+chsh -s /bin/zsh
+zshtoroot
+#sudo chsh -s /bin/zsh root
+
+echo "################################################################"
+echo "###################    T H E   E N D      ######################"
+echo "################################################################"
