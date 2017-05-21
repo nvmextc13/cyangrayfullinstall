@@ -1,10 +1,7 @@
-# Simple setup of i3-gaps, bumblebee, conky and zsh
+# Installs the setup on a clean machine
 
-Install the main files programs first, ie i3-gaps, oh-my-zsh etc..
-These are just config files.
-All these files should go in $HOME, on a default setup.
+This script installs everything required for the setup in the screenshot. Only tested on Mint I3 18.1 Cinnamon
 
-This is where I setup everything from;
 
 powerlevel9k for oh-my-zsh - https://github.com/bhilburn/powerlevel9k
 
