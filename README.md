@@ -1,6 +1,6 @@
 # Installs the setup on a clean machine
 
-This script installs everything required for the setup in the screenshot. Only tested on Mint I3 18.1 Cinnamon
+This script installs everything required for the setup in the screenshot. Only tested on Mint 18.1 Cinnamon
 
 
 powerlevel9k for oh-my-zsh - https://github.com/bhilburn/powerlevel9k
