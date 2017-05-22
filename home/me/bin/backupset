@@ -5,7 +5,7 @@
 tempdir="/home/me/tempbackupi3cg"
 tempfolders="/home/me/tempbackupi3cg/restore-i3-scripts-cyangray/home/me"
 tempfiles="/home/me/tempbackupi3cg/restore-i3-scripts-cyangray"
-archivefolder="tempbackupi3cg/restore-i3-scripts-cyangray"
+archivefolder="restore-i3-scripts-cyangray"
 
 # Where to backup to.
 dest1="/home/me/Backups"
@@ -16,15 +16,16 @@ cp -R /home/me/restore-i3-scripts-cyangray/ $tempdir
 mkdir -p $tempfolders
 
 # folders
-cp -R --parents /home/me/bin/ $tempfiles
-cp -R --parents /home/me/.config/i3/ $tempfiles
-cp -R --parents /home/me/.config/conky/ $tempfiles
-cp -R --parents /home/me/.oh-my-zsh/custom/plugins/ $tempfiles
+cpvar="cp -R --parents /home/me"
+$cpvar/bin/ $tempfiles
+$cpvar/.config/i3/ $tempfiles
+$cpvar/.config/conky/ $tempfiles
+$cpvar/.oh-my-zsh/custom/plugins/ $tempfiles
 
 # files
-cp -R --parents /home/me/.zshrc $tempfiles
-cp -R --parents /home/me/.config/bumblebee-status/themes/cyangray.json $tempfiles
-cp -R --parents /home/me/.oh-my-zsh/custom/themes/powerlevel9k/cyangray.zsh-theme $tempfiles
+$cpvar/.zshrc $tempfiles
+$cpvar/.config/bumblebee-status/themes/cyangray.json $tempfiles
+$cpvar/.oh-my-zsh/custom/themes/powerlevel9k/cyangray.zsh-theme $tempfiles
 
 # Create archive filename.
 day=$(date +%b-%d-%y-%H:%M:%S)
@@ -35,7 +36,9 @@ echo "Backing up $tempdir to $dest1/$archive_file"
 date
 echo
 # Backup the files using tar.
+cd $tempdir
 tar czf $dest1/$archive_file $archivefolder
+cd $HOME
 
 # Clean up
 echo "Cleaning up temp files"
