@@ -80,7 +80,7 @@ Plugin 'vim-ctrlspace/vim-ctrlspace'
 
 " jump around documents
 Bundle 'Lokaltog/vim-easymotion'
-let g:EasyMotion_leader_key = '<Leader>' 
+let g:EasyMotion_leader_key = '<Leader>'
 
 " highlight searching, for easymotion as well
 Plugin 'haya14busa/incsearch.vim'
@@ -97,12 +97,12 @@ Bundle 'L9'
 Bundle 'FuzzyFinder'
 
 " multiple cursors
-Plugin 'terryma/vim-multiple-cursors'
+" Plugin 'terryma/vim-multiple-cursors'
 
 "load devicons last
 Plugin 'ryanoasis/vim-devicons'
-let g:webdevicons_enable_airline_tabline = 1 " adding to vim-airline's tabline 
-let g:webdevicons_enable_airline_statusline = 1 " adding to vim-airline's statusline 
+let g:webdevicons_enable_airline_tabline = 1 " adding to vim-airline's tabline
+let g:webdevicons_enable_airline_statusline = 1 " adding to vim-airline's statusline
 
 " git repos on your local machine (i.e. when working on your own plugin)
 " Plugin 'file:///home/gmarik/path/to/plugin'
@@ -126,8 +126,8 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 " remapping
-nnoremap <Tab> <C-W>w 
-nnoremap <S-Tab> :bn<CR> 
+nnoremap <Tab> <C-W>w
+nnoremap <S-Tab> :bn<CR>
 nnoremap <F5> :buffers<CR>:buffer<Space> "F5 to select from buffers
 " resize horzontal split window
 nnoremap <C-S-Up> <C-W>-<C-W>-
@@ -145,4 +145,4 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 "ctrl+n will toggle nerdtree
-map <C-n> :NERDTreeToggle<CR> 
+map <C-n> :NERDTreeToggle<CR>
