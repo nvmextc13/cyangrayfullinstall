@@ -3,7 +3,27 @@ set hidden
 filetype off                  " required
 
 set number
+set relativenumber
 set ruler
+
+set history=100
+
+" highlight words on search
+"set hlsearch
+
+" remove whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
+
+filetype indent on
+set nowrap
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set smartindent
+set autoindent
+
+set showmatch
+
 hi LineNr ctermbg=NONE ctermfg=244 guibg=NONE guifg=244
 hi CursorLine cterm=NONE ctermbg=234 ctermfg=NONE guibg=234 guifg=NONE
 hi CursorColumn cterm=NONE ctermbg=234 ctermfg=NONE guibg=234 guifg=NONE
@@ -75,6 +95,9 @@ map zg/ <Plug>(incsearch-easymotion-stay)
 " prereq for FuzzyFinder
 Bundle 'L9'
 Bundle 'FuzzyFinder'
+
+" multiple cursors
+Plugin 'terryma/vim-multiple-cursors'
 
 "load devicons last
 Plugin 'ryanoasis/vim-devicons'
