@@ -12,7 +12,7 @@ home/me/.oh-my-zsh/
 home/me/.zshrc
 "
 
-# Where to resore to.
+# Where to restore to.
 dest="$HOME"
 
 # Print start status message.

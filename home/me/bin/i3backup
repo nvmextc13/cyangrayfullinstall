@@ -1,0 +1,45 @@
+#!/bin/bash
+####################################
+
+# What to backup. 
+backup_files="
+
+/etc/i3status.conf
+/home/me/.bashrc
+/home/me/.bash_history
+/home/me/.zshrc
+/home/me/.zsh_history
+
+/home/me/bin
+/home/me/.config/i3
+/home/me/.config/bumblebee-status
+/home/me/.config/conky
+/home/me/.oh-my-zsh
+/home/me/Documents
+/home/me/Pictures
+
+/usr/share/powerline
+
+"
+
+# Where to backup to.
+dest="/home/me/Backups"
+
+# Create archive filename.
+day=$(date +%b-%d-%y-%H:%M:%S)
+archive_file="backup-$day.tgz"
+
+# Print start status message.
+echo "Backing up $backup_files to $dest/$archive_file"
+date
+echo
+
+# Backup the files using tar.
+tar czf $dest/$archive_file $backup_files
+
+# Print end status message.
+echo
+echo "Backup finished"
+date
+
+# Long listin

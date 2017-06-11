@@ -27,20 +27,22 @@ sudo apt-get -y update
 sudo apt-get install -y grub-customizer neofetch sublime-text
 
 ########## terminal styling
-# style, oh-my-zsh, powerline, fonts
+# install oh-my-zsh with syntax highlighting and powerlvl9k
 sudo apt install -y zsh 
 wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
-
-# replaced powerline with powerlevel
-#sudo apt install -y powerline
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 # install icon fonts
 sudo apt-get install -y fonts-font-awesome
-sh ./awesome-terminal-fonts/install.sh
+#awesome-terminal-fonts
+git clone https://github.com/gabrielelana/awesome-terminal-fonts.git ~/.config/awesome-terminal-fonts-install
+sh ~/.config/awesome-terminal-fonts-install/install.sh
 # powerline fonts
 git clone https://github.com/powerline/fonts.git ~/.config/powerline-fonts-install
 sh ~/.config/powerline-fonts-install/install.sh
+#clean up
+rm -rf ~/.config/awesome-terminal-fonts-install
 rm -rf ~/.config/powerline-fonts-install
 
 ########## get i3-gaps
@@ -64,20 +66,25 @@ sudo apt-get upgrade -y
 sudo apt-get autoremove -y
 sudo apt-get autoclean -y
 
-# configuration files from previous backup
-## restore config from settingsbackup.tar file
-sudo sh 003copyconfig.sh
-
 # install icons and themes
-sudo sh iconsandthemes.sh
+sudo sh 003iconsandthemes.sh
 
 # install conky
 sudo sh ~/.config/conky/install-conky.sh
 
+# configuration files from previous backup
+## restore config from settingsbackup.tar file
+sudo sh 004copyconfig.sh
+
+# nerd-fonts (600mb)
+git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git ~/.config/nerd-fonts-install
+sh ~/.config/nerd-fonts-install/install.sh
+rm -rf ~/.config/nerd-fonts-install
+
 # setting shell
 chsh -s /bin/zsh
 zshtoroot
-#sudo chsh -s /bin/zsh root
+sudo chsh -s /bin/zsh root
 
 echo "################################################################"
 echo "###################    T H E   E N D      ######################"

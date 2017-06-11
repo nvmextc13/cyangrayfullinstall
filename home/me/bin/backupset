@@ -20,12 +20,12 @@ cpvar="cp -R --parents /home/me"
 $cpvar/bin/ $tempfiles
 $cpvar/.config/i3/ $tempfiles
 $cpvar/.config/conky/ $tempfiles
-$cpvar/.oh-my-zsh/custom/plugins/ $tempfiles
 
 # files
 $cpvar/.zshrc $tempfiles
 $cpvar/.config/bumblebee-status/themes/cyangray.json $tempfiles
 $cpvar/.oh-my-zsh/custom/themes/powerlevel9k/cyangray.zsh-theme $tempfiles
+$cpvar/.oh-my-zsh/custom/themes/powerlevel9k/functions/icons.zsh $tempfiles
 
 # Create archive filename.
 day=$(date +%b-%d-%y-%H:%M:%S)
