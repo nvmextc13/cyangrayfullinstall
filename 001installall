@@ -33,6 +33,9 @@ wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - 
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
+# vim
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vi
+
 # install icon fonts
 sudo apt-get install -y fonts-font-awesome
 #awesome-terminal-fonts
@@ -80,6 +83,12 @@ sudo sh 004copyconfig.sh
 git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git ~/.config/nerd-fonts-install
 sh ~/.config/nerd-fonts-install/install.sh
 rm -rf ~/.config/nerd-fonts-install
+
+# colorful icons in terminal (ls)
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/illinoisjackson/even-better-ls/master/install.sh)"
+
+# install vim plugins from .vimrc
+vim +PluginInstall +qall
 
 # setting shell
 chsh -s /bin/zsh
