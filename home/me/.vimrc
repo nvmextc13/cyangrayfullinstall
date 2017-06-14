@@ -3,22 +3,23 @@ set hidden
 filetype off                  " required
 set encoding=utf8
 "set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
-set number               "show number column
-set relativenumber       "number column is relative to cursor
-set mouse=a              "enable mouse
-set history=1000         "increasecommand history
-" set hlsearch            " highlight words on search
-set showmode             " always show what mode is in
-set statusline=2         "always show statusline
-set laststatus=2         "always show statusline even when single file open
-set showcmd              "show Normal commands in bottom-right
-set showmatch            "highlight matching brackets, commas
-syntax on                "syntax hilighting
+set number                    "show number column
+set relativenumber            "number column is relative to cursor
+set mouse=a                   "enable mouse
+set history=1000              "increasecommand history
+" set hlsearch                 " highlight words on search
+set showmode                  " always show what mode is in
+set statusline=2              "always show statusline
+set laststatus=2              "always show statusline even when single file open
+set noshowmode                "don't show mode status, because airline does this already
+set showcmd                   "show Normal commands in bottom-right
+set showmatch                 "highlight matching brackets, commas
+syntax on                     "syntax hilighting
 filetype plugin indent on
-set nowrap               "no linewrapping
-set tabstop=5            "set tab spacing
-set shiftwidth=5         "set indent spacing
-set softtabstop=5        "<BS> will remove tabs
+set nowrap                    "no linewrapping
+set tabstop=5                 "set tab spacing
+set shiftwidth=5              "set indent spacing
+set softtabstop=5             "<BS> will remove tabs
 set expandtab
 set smartindent
 set autoindent
@@ -103,26 +104,43 @@ filetype plugin indent on    " required
 """"" :PluginSearch foo - searches for foo; append `!` to refresh local cache
 """"" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 """"" see :h vundle for more details or wiki for FAQ
+"
 """"" Put your non-Plugin stuff after this line
 
 " let mapleader = ","
 " let g:mapleader = ","
 
 " quick saving
-nnoremap <leader>w :w<cr>
+nnoremap <Leader>w :w<cr>
 
 " exit and save
-nnoremap <leader>q :wqa<CR>
+nnoremap <Leader>q :wqa<CR>
+
+"quick exit
+nnoremap <Leader><leader>q :q<CR>
+
+"remap Ctrl+U/W so undo is saved
+inoremap <C-u> <C-g>u<C-u>
+inoremap <C-w> <C-g>u<C-w>
 
 "quick comment
-nmap <leader>g gcc
-nmap <leader>f 10gcc
+nmap <Leader>g gcc
+nmap <Leader>f 10gcc
+
+"remove line and after the cursor in normal and visual mode
+nnoremap <Leader>a d^
+nnoremap <Leader>l d$
+inoremap <Leader>a d^
+inoremap <Leader>l d$
+
+"remove word at the cursor
+nnoremap <Leader> dw
 
 " remap escape in insert mode
 inoremap jj <Esc>
 " imap <S-Space> <Esc>
 " nnoremap <S-Space> i
-
+"
 "quick split opening
 nnoremap <leader>v :vsplit<CR>
 nnoremap <leader>h :split<CR>
