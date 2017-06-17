@@ -7,18 +7,20 @@ set number                    "show number column
 set relativenumber            "number column is relative to cursor
 set mouse=a                   "enable mouse
 set history=1000              "increasecommand history
-" set hlsearch                 " highlight words on search
-set showmode                  " always show what mode is in
+" set hlsearch                 " highlight words on search, not needed because incsearch does this
+" set showmode                  "always show what mode is in
 set statusline=2              "always show statusline
 set laststatus=2              "always show statusline even when single file open
 set noshowmode                "don't show mode status, because airline does this already
 set showcmd                   "show Normal commands in bottom-right
 set showmatch                 "highlight matching brackets, commas
 syntax on                     "syntax hilighting
+set ignorecase                "ignore lowercase
+set smartcase                 "smart ignore lowercase
 filetype plugin indent on
 set nowrap                    "no linewrapping
 set tabstop=5                 "set tab spacing
-set shiftwidth=5              "set indent spacing
+set shiftwidth=1              "set indent spacing
 set softtabstop=5             "<BS> will remove tabs
 set expandtab
 set smartindent
@@ -41,13 +43,15 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'                          "let Vundle manage Vundle, required
 
 Plugin 'L9'                                            "prereq for FuzzyFinder
-Plugin 'FuzzyFinder'                                   "
+Plugin 'FuzzyFinder'                                   "fuzzyfinder
 Plugin 'vim-airline/vim-airline'                       "themes
 Plugin 'vim-airline/vim-airline-themes'                "themes
      let g:airline_theme='murmur'                      "theme selection
      let g:airline_powerline_fonts = 1                 "required
      let g:airline#extensions#tabline#enabled = 1
 Plugin 'scrooloose/nerdtree'                           "nerdtree and colors
+     autocmd stdinreadpre * let s:std_in=1             " open vim with nerdtree running
+     autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'       "nerdree highlight based on filetype
      let g:NERDTreeFileExtensionHighlightFullName = 1
      let g:NERDTreeExactMatchHighlightFullName = 1
@@ -55,8 +59,9 @@ Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'       "nerdree highlight based 
      let g:NERDTreeHighlightFolders = 1                "enables folder icon highlighting using exact match
      let g:NERDTreeHighlightFoldersFullName = 1        "highlights the folder name
      let NERDTreeShowHidden=1                          "shows hidden files default, shift+i to toggle
-     hi Directory guifg=032 ctermfg=032 ctermbg=NONE   "folder colors
-     hi NERDTreeOpenable ctermfg=001                   "arrow colors
+"folder colors then arrow colors
+     hi Directory guifg=032 ctermfg=032 ctermbg=NONE
+     hi NERDTreeOpenable ctermfg=001
 Plugin 'tpope/vim-fugitive'                            "git tools
 Plugin 'Raimondi/delimitMate'                          "auto close brackets
 Plugin 'tomtom/tcomment_vim'                           "instant comments
@@ -116,34 +121,40 @@ nnoremap <Leader>w :w<cr>
 " exit and save
 nnoremap <Leader>q :wqa<CR>
 
-"quick exit
-nnoremap <Leader><leader>q :q<CR>
+" close window without save
+nnoremap <Leader><Leader>q :q!<CR>
 
-"remap Ctrl+U/W so undo is saved
+" remap Ctrl+U/W so undo is saved
 inoremap <C-u> <C-g>u<C-u>
-inoremap <C-w> <C-g>u<C-w>
 
-"quick comment
-nmap <Leader>g gcc
-nmap <Leader>f 10gcc
+" cut line before and after the cursor in normal and visual mode
+nnoremap <Leader><Leader>a d^
+nnoremap <Leader><Leader>l d$
+inoremap <Leader><Leader>a d^
+inoremap <Leader><Leader>l d$
 
-"remove line and after the cursor in normal and visual mode
-nnoremap <Leader>a d^
-nnoremap <Leader>l d$
-inoremap <Leader>a d^
-inoremap <Leader>l d$
+" move to beginning or end of the line
+nnoremap <Leader>a ^
+nnoremap <Leader>l $
 
-"remove word at the cursor
-nnoremap <Leader> dw
+" dd then paste at the end of the current line
+nnoremap <Leader>p <ESC>pkJ
+
+" remove word at the cursor
+nnoremap <Leader>c dw
 
 " remap escape in insert mode
 inoremap jj <Esc>
 " imap <S-Space> <Esc>
 " nnoremap <S-Space> i
-"
+
+" quick comment
+nmap <Leader>g gcc
+nmap <Leader>f 10gcc
+
 "quick split opening
-nnoremap <leader>v :vsplit<CR>
-nnoremap <leader>h :split<CR>
+nnoremap <Leader>v :vsplit<CR>
+nnoremap <Leader>h :split<CR>
 
 " tab move between splits
 nnoremap <Tab> <C-W>w
@@ -168,10 +179,6 @@ nnoremap <C-S-Left> <C-W><<C-W><
 " vnoremap <silent> # :call VisualSelection('b')<CR>
 " search and replace selected text
 " vnoremap <silent> <Leader>r :call VisualSelection('replace')<CR>
-
-" open vim with nerdtree running
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " ctrl+n will toggle nerdtree
 map <C-n> :NERDTreeToggle<CR>
