@@ -5,20 +5,17 @@
 #.bashrc
 #.bash_history
 
-backup_files="
-home/me/bin/
-home/me/.config/
-home/me/.oh-my-zsh/
-home/me/.zshrc
-"
+# Declare the files and directories that need to be restored
+backup_files="home/me/bin/ home/me/.config/ home/me/.oh-my-zsh/ home/me/.zshrc"
 
-# Where to restore to.
+# Define the destination directory
 dest="$HOME"
 
 # Print start status message.
 echo "Restoring $backup_files to $dest"
+
+# Copy the files and directories from the backup location to the destination directory
 cp -R $backup_files $dest
 
 # Print end status message.
-echo
 echo "Restore finished"
